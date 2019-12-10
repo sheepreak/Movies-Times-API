@@ -38,3 +38,7 @@ This application uses swagger. Routes are listed in `api/swagger/swagger.yaml`
 - Subscription date - number (epochmillis)
 - Watched - boolean: indicates if the user has seen the movie yet
 - Watch date - number (epochmillis): indicates when the user has seen the movie
+
+## Disconnecting Docker
+
+To stop all containers type : `docker stop $(docker ps -q)`
