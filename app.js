@@ -17,9 +17,6 @@ SwaggerExpress.create(config, (err, swaggerExpress) => {
   // install middleware
   swaggerExpress.register(app);
 
-  var port = process.env.PORT || 10010;
-  app.listen(port);
-
   client.ping({
     requestTimeout: 30000,
   }, (error) => {
@@ -31,6 +28,9 @@ SwaggerExpress.create(config, (err, swaggerExpress) => {
   });
 
   createIndices();
+
+  const port = process.env.PORT || 10010;
+  app.listen(port);
 
   console.log('http://127.0.0.1:' + port);
 });
