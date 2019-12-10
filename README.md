@@ -27,7 +27,6 @@ This application uses swagger. Routes are listed in `api/swagger/swagger.yaml`
 #### User (to be confirmed after auth is done)
 
 - ID - string: User ID
-- Email - string: User mail (may be in token ?)
 - Token - string: User token containing their infos
 
 #### Subscription
