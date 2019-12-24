@@ -3,20 +3,18 @@
     "index": "movies",
     "body": {
       "mappings": {
-        "movie": {
-          "properties": {
-            "id": {
-              "type": "keyword"
-            },
-            "name": {
-              "type": "text"
-            },
-            "release_date": {
-              "type": "keyword"
-            },
-            "poster": {
-              "type": "text"
-            }
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "keyword"
+          },
+          "release_date": {
+            "type": "keyword"
+          },
+          "poster": {
+            "type": "keyword"
           }
         }
       }
@@ -25,14 +23,12 @@
     "index": "users",
     "body": {
       "mappings": {
-        "user": {
-          "properties": {
-            "id": {
-              "type": "keyword"
-            },
-            "token": {
-              "type": "keyword"
-            }
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "token": {
+            "type": "keyword"
           }
         }
       }
@@ -41,26 +37,24 @@
     "index": "subscriptions",
     "body": {
       "mappings": {
-        "subscription": {
-          "properties": {
-            "id": {
-              "type": "keyword"
-            },
-            "movie_id": {
-              "type": "keyword"
-            },
-            "user_id": {
-              "type": "keyword"
-            },
-            "watched": {
-              "type": "boolean"
-            },
-            "subscription_date": {
-              "type": "keyword"
-            },
-            "watch_date": {
-              "type": "keyword"
-            }
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "movie_id": {
+            "type": "keyword"
+          },
+          "user_id": {
+            "type": "keyword"
+          },
+          "watched": {
+            "type": "boolean"
+          },
+          "subscription_date": {
+            "type": "keyword"
+          },
+          "watch_date": {
+            "type": "keyword"
           }
         }
       }
