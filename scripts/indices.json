@@ -11,7 +11,7 @@
             "type": "keyword"
           },
           "release_date": {
-            "type": "keyword"
+            "type": "date"
           },
           "poster": {
             "type": "keyword"
