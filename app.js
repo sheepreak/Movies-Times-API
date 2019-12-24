@@ -68,6 +68,25 @@ const createInitialData = async () => {
     const users = JSON.parse(usersFile);
 
     movies.forEach(doc => {
+      client.deleteByQuery({
+        index: env.indices.movies,
+        body: {
+          query: {
+            bool: {
+              must: [
+                {
+                  term: {
+                    id: {
+                      value: doc.id
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      });
+
       client.index({
         index: env.indices.movies,
         id: doc.id + moment.utc().valueOf(),
@@ -76,6 +95,25 @@ const createInitialData = async () => {
     });
 
     users.forEach(doc => {
+      client.deleteByQuery({
+        index: env.indices.users,
+        body: {
+          query: {
+            bool: {
+              must: [
+                {
+                  term: {
+                    id: {
+                      value: doc.id
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      });
+
       client.index({
         index: env.indices.users,
         id: doc.id + moment.utc().valueOf(),

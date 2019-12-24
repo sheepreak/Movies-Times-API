@@ -18,13 +18,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+  /movies:
+    x-swagger-router-controller: movies
     get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
+      description: Returns the list of films
+      operationId: getMovies
       parameters:
         - name: name
           in: query
@@ -35,9 +33,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
+            $ref: "#/definitions/MovieResponse"
         default:
           description: Error
           schema:
@@ -46,7 +42,7 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  MovieResponse:
     required:
       - message
     properties:
