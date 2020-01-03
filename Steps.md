@@ -23,7 +23,7 @@
 
 ## Front Implementation
 
-- [ ] Generate react app
+- [x] Generate react app
 - [ ] Create list view
 - [ ] Create subscriptions
 - [ ] Auth
