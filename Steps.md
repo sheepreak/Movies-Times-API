@@ -5,9 +5,9 @@
 - [x] Set up ES and Kibana with Docker Compose
 - [x] Set up Express
 - [x] Add Swagger wrapper
-- [ ] Setup ES inject script at app launch
+- [x] Setup ES inject script at app launch
   - [x] Inject indices
-  - [ ] Inject data
+  - [x] Inject data
   
 ## Create API endpoints
 
@@ -17,13 +17,17 @@
   - [ ] Create subscriptions
   - [ ] Create users
 - [ ] Setup GET routes
-  - [ ] Get movies list
+  - [x] Get movies list
   - [ ] Get User details
   - [ ] Get subscriptions for one user
 
 ## Front Implementation
 
-- [ ] Check what to do (tuto react or vue)
+- [ ] Generate react app
+- [ ] Create list view
+- [ ] Create subscriptions
+- [ ] Auth
+- [ ] User page
 
 ## Testing
 
