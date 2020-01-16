@@ -18,9 +18,6 @@ const routing = (
 			<li>
 				<Link to="/movies">Movies</Link>
 			</li>
-			<li>
-				<Link to="/subscriptions">My Subscriptions</Link>
-			</li>
 		</ul>
 		<Switch>
 			<Route exact path="/" component={App} />

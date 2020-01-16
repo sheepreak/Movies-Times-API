@@ -15,6 +15,16 @@ Kibana is now available on http://localhost:5601/
 
 This application uses swagger. Routes are listed in `api/swagger/swagger.yaml`
 
+#### Launch API
+
+`npm start`
+
+#### Launch client
+
+`cd client`
+
+`npm start`
+
 ## Model
 
 #### Movie

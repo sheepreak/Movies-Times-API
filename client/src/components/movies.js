@@ -1,8 +1,12 @@
 import React from "react";
+import MoviesList from './movies/MoviesList'
 
 class Movies extends React.Component {
 	render() {
-		return <h1>Movies</h1>
+		return <React.Fragment>
+			<h1>Movies</h1>
+			<MoviesList />
+		</React.Fragment>
 	}
 }
 
