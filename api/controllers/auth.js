@@ -10,7 +10,7 @@ const login = async (req, res) => {
 
 		if (! (body && body.username && body.password) ) {
 			console.log('missing arguments');
-			return res.status(400).send('missing arguments');
+			return res.status(400).send({message: 'missing arguments'});
 		}
 
 		let user = await client.search({
@@ -20,7 +20,7 @@ const login = async (req, res) => {
 
 		if (!user.hits.hits.length) {
 			console.log('no user by this username');
-			return res.status(500).send('no user by this username');
+			return res.status(500).send({message: 'no user by this username'});
 		}
 
 		user = user.hits.hits[0]._source;
@@ -30,11 +30,11 @@ const login = async (req, res) => {
 		if (hashedPasswordPassed) {
 			return res.status(200).json(user);
 		} else {
-			return res.status(401).send('wrong credentials');
+			return res.status(401).send({message: 'wrong credentials'});
 		}
 	} catch (e) {
 		console.log(e);
-		return res.status(500).send(e);
+		return res.status(500).send({message: e});
 	}
 };
 
