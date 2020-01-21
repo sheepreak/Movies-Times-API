@@ -1,6 +1,8 @@
 [
   {
     "id": "admin",
-    "token": "test"
+    "username": "admin",
+    "password": "admin",
+    "salt": "secret"
   }
 ]

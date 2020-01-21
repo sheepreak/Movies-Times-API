@@ -7,6 +7,7 @@ const client = new elasticsearch.Client();
 const fs = require('fs');
 const env = require('./env');
 const moment = require('moment');
+const bcrypt = require('bcrypt');
 module.exports = app; // for testing
 
 const config = {
@@ -114,9 +115,12 @@ const createInitialData = async () => {
         }
       });
 
+      doc['hash'] = bcrypt.hashSync(doc.password, 10);
+      delete doc.password;
+
       client.index({
         index: env.indices.users,
-        id: doc.id + moment.utc().valueOf(),
+        id: doc.id + '-' + moment.utc().valueOf(),
         body: doc
       })
     });

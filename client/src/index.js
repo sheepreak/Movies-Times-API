@@ -7,22 +7,21 @@ import Movies from './components/movies'
 import Subscriptions from './components/subscriptions'
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import NotFound from "./components/error/notfound";
+import {PrivateRoute} from "./components/private/PrivateRoute";
+import {RouterComponent} from "./components/router/RouterComponent";
+import {LoginPage} from "./components/auth/LoginPage";
+import {Logout} from "./components/auth/Logout";
 
 const routing = (
 	<Router>
 		<div>
-		<ul>
-			<li>
-				<Link to="/">Home</Link>
-			</li>
-			<li>
-				<Link to="/movies">Movies</Link>
-			</li>
-		</ul>
+			<RouterComponent/>
 		<Switch>
-			<Route exact path="/" component={App} />
-			<Route exact path="/movies" component={Movies} />
-			<Route exact path="/subscriptions/:userId" component={Subscriptions} />
+			<PrivateRoute exact path="/" component={App} />
+			<PrivateRoute exact path="/movies" component={Movies} />
+			<PrivateRoute exact path="/subscriptions/:userId" component={Subscriptions} />
+			<PrivateRoute exact path="/logout" component={Logout} />
+			<Route path={'/login'} component={LoginPage}/>
 			<Route component={NotFound}/>
 		</Switch>
 		</div>
