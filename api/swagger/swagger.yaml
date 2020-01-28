@@ -94,7 +94,7 @@ paths:
               username:
                 type: string
               movie:
-                type: string
+                type: integer
               status:
                 type: boolean
       responses:

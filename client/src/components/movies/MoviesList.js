@@ -5,15 +5,14 @@ import './movies.css';
 
 class MoviesList extends React.Component {
 	state = {
-		movies: [],
-		username: ''
+		movies: []
 	};
 
 	componentDidMount() {
 		fetch(config.apiUrl + config.endpoints.movies.bestRated)
 			.then(res => res.json())
 			.then(data => {
-				this.setState({movies: data.movies, username: localStorage.getItem('user').username})
+				this.setState({movies: data.movies})
 			})
 			.catch(console.log)
 	}
@@ -22,7 +21,7 @@ class MoviesList extends React.Component {
 		return <div
 			className={'flex-container'}
 		>
-			{this.state.movies.map(movie => <Movie movie={movie} subscribed={false} username={this.state.username}/>)}
+			{this.state.movies.map(movie => <Movie movie={movie} subscribed={false}/>)}
 		</div>
 	}
 }

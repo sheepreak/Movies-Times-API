@@ -13,29 +13,35 @@ import './movies.css';
 class Movie extends React.Component {
 	posterUrl = 'https://image.tmdb.org/t/p/w500/' + this.props.movie.poster_path;
 
-	//TODO change subscribed after mock
+	username = JSON.parse(localStorage.getItem('user')).username;
 
-	doSubscribe = () => {
-		fetch(config.apiUrl + config.endpoints.subscriptions.subscribe, {
-			method: 'post',
-			headers: {
-				'content-type': 'application/json'
-			},
-			body: JSON.stringify({
-				body: {
-					username: this.props.username,
-					movie: this.props.movie.id,
-					status: this.props.subscribed
-				}
-			})
-		}).then(res => {
-			this.props.movie.subscribed = res.body.status;
-		}).catch(err => {
-			console.log(err);
-		})
-	};
+	componentDidMount() {
+
+	}
+
+
 
 	render() {
+		const doSubscribe = () => {
+			fetch(config.apiUrl + config.endpoints.subscriptions.subscribe, {
+				method: 'post',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify({
+					body: {
+						username: this.username,
+						movie: this.props.movie.id,
+						status: this.props.subscribed
+					}
+				})
+			}).then(res => {
+				this.props.movie.subscribed = res.body.status;
+			}).catch(err => {
+				console.log(err);
+			})
+		};
+
 		return <React.Fragment>
 			<Card className={'card'}>
 				<CardActionArea>
@@ -62,7 +68,7 @@ class Movie extends React.Component {
 					<CardActions
 						className={'buttons'}
 					>
-						<Button size="small" color="primary" onClick={this.doSubscribe}>
+						<Button size="small" color="primary" onClick={doSubscribe}>
 							{this.props.subscribed ? 'Unsubscribe' : 'Subscribe'}
 						</Button>
 					</CardActions>
