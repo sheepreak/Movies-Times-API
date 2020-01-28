@@ -1,26 +1,43 @@
 'use strict';
 
-const elasticsearch = require('elasticsearch');
 const config = require('./../../env');
-const client = new elasticsearch.Client();
+const superagent = require('superagent');
 
-const getMovies = async (req, res) => {
+const getBestRatedMovies = async (req, res) => {
     try {
-        const query = {
-            size: 100
-        };
+        const page = req.swagger.params.page.value;
 
-        const results = await client.search({
-            index: config.indices.movies,
-            body: query
+        const movies = await fetchApiData(config.moviesApi.endpoints.bestRated, {
+            page: page ? page : 1,
+            adult: true
         });
 
-        return res.json(results.hits.hits.map(el => el._source));
+        res.status(200).json({
+            movies: movies.results,
+            page: movies.page,
+            totalPages: movies.total_pages,
+            totalResults: movies.total_results
+        });
     } catch (e) {
-        res.error(e);
+        console.log(e);
+        res.status(500).send(e);
     }
 };
 
+const fetchApiData = async (endpoint, opts) => {
+    opts['api_key'] = config.moviesApi.token;
+
+    let body = {};
+
+    await superagent.get(config.moviesApi.uri + endpoint)
+        .query(opts)
+        .then(res => {
+            body = res.body;
+        });
+
+    return body;
+};
+
 module.exports = {
-    getMovies
+    getBestRatedMovies
 };

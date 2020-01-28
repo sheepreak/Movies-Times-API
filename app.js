@@ -15,29 +15,33 @@ const config = {
 };
 
 SwaggerExpress.create(config, async (err, swaggerExpress) => {
-  if (err) { throw err; }
+  try {
+    if (err) { throw err; }
 
-  // install middleware
-  swaggerExpress.register(app);
+    // install middleware
+    swaggerExpress.register(app);
 
-  await client.ping({
-    requestTimeout: 30000,
-  }, (error) => {
-    if (error) {
-      console.error('elasticsearch cluster is down!');
-    } else {
-      console.log('Everything is ok');
-    }
-  });
+    await client.ping({
+      requestTimeout: 30000,
+    }, (error) => {
+      if (error) {
+        console.error('elasticsearch cluster is down!');
+      } else {
+        console.log('Everything is ok');
+      }
+    });
 
-  await createIndices();
+    await createIndices();
 
-  await createInitialData()
+    await createInitialData()
 
-  const port = process.env.PORT || 10010;
-  app.listen(port);
+    const port = process.env.PORT || 10010;
+    app.listen(port);
 
-  console.log('http://127.0.0.1:' + port);
+    console.log('http://127.0.0.1:' + port);
+  } catch (e) {
+    console.log(e)
+  }
 });
 
 const createIndices = async () => {
@@ -63,37 +67,8 @@ const createIndices = async () => {
 
 const createInitialData = async () => {
   try {
-    const moviesFile = fs.readFileSync('./scripts/movies.json');
-    const movies = JSON.parse(moviesFile);
     const usersFile = fs.readFileSync('./scripts/users.json');
     const users = JSON.parse(usersFile);
-
-    movies.forEach(doc => {
-      client.deleteByQuery({
-        index: env.indices.movies,
-        body: {
-          query: {
-            bool: {
-              must: [
-                {
-                  term: {
-                    id: {
-                      value: doc.id
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      });
-
-      client.index({
-        index: env.indices.movies,
-        id: doc.id + moment.utc().valueOf(),
-        body: doc
-      })
-    });
 
     users.forEach(doc => {
       client.deleteByQuery({

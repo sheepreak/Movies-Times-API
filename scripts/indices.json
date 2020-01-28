@@ -1,25 +1,5 @@
 [
   {
-    "index": "movies",
-    "body": {
-      "mappings": {
-        "properties": {
-          "id": {
-            "type": "keyword"
-          },
-          "name": {
-            "type": "keyword"
-          },
-          "release_date": {
-            "type": "date"
-          },
-          "poster": {
-            "type": "keyword"
-          }
-        }
-      }
-    }
-  }, {
     "index": "users",
     "body": {
       "mappings": {

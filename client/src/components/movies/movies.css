@@ -1,7 +1,24 @@
 .card {
     width: 345px;
+    margin-bottom: 50px;
 }
 
 .media {
-    height: 140px;
+    height: 500px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.buttons-container {
+    height: 50px;
+    position: relative;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 0;
 }

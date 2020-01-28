@@ -1,26 +1,29 @@
 import React from "react";
 import Movie from "./Movie";
-import moment from "moment";
-import config from "../../env"
+import config from "../../env";
+import './movies.css';
 
 class MoviesList extends React.Component {
 	state = {
-		movies: []
+		movies: [],
+		username: ''
 	};
 
 	componentDidMount() {
-		fetch(config.apiUrl + config.endpoints.movies.list)
+		fetch(config.apiUrl + config.endpoints.movies.bestRated)
 			.then(res => res.json())
 			.then(data => {
-				this.setState({movies: data})
+				this.setState({movies: data.movies, username: localStorage.getItem('user').username})
 			})
 			.catch(console.log)
 	}
 
 	render() {
-		return <React.Fragment>
-			{this.state.movies.map(movie => <Movie name={movie.name} release_date={moment.utc(movie.release_date).format('DD-MM-YYYY')}/>)}
-		</React.Fragment>
+		return <div
+			className={'flex-container'}
+		>
+			{this.state.movies.map(movie => <Movie movie={movie} subscribed={false} username={this.state.username}/>)}
+		</div>
 	}
 }
 

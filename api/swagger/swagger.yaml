@@ -59,6 +59,53 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /movies/bestrated:
+    x-swagger-router-controller: movies
+    get:
+      description: Returns the list of best rated movies
+      operationId: getBestRatedMovies
+      parameters:
+        - name: page
+          in: query
+          description: The page to fetch from the movie API
+          required: false
+          type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/MovieResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /subscribe:
+    x-swagger-router-controller: subscriptions
+    post:
+      description: Subscribe/Unsubscribe to a movie
+      operationId: postSubscribe
+      parameters:
+        - name: body
+          in: body
+          description: the body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              movie:
+                type: string
+              status:
+                type: boolean
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/MovieResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
