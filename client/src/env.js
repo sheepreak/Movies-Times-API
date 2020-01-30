@@ -5,7 +5,8 @@ module.exports = {
 			bestRated: '/movies/bestrated'
 		},
 		subscriptions: {
-			subscribe: '/subscribe'
+			subscribe: '/subscribe',
+			unsubscribe: '/unsubscribe'
 		}
 	}
 };

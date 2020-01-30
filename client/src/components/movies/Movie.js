@@ -11,37 +11,53 @@ import config from '../../env';
 import './movies.css';
 
 class Movie extends React.Component {
+	state = {
+		subscribed: this.props.subscribed
+	};
+
 	posterUrl = 'https://image.tmdb.org/t/p/w500/' + this.props.movie.poster_path;
 
 	username = JSON.parse(localStorage.getItem('user')).username;
 
-	componentDidMount() {
+	doSubscribe = () => {
+		fetch(config.apiUrl + config.endpoints.subscriptions.subscribe, {
+			method: 'post',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				body: {
+					username: this.username,
+					movie: this.props.movie.id
+				}
+			})
+		}).then(res => {
+			this.setState({subscribed: res.status === 201});
+		}).catch(err => {
+			console.log(err);
+		})
+	};
 
-	}
-
-
+	doUnsubscribe = () => {
+		fetch(config.apiUrl + config.endpoints.subscriptions.unsubscribe, {
+			method: 'post',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				body: {
+					username: this.username,
+					movie: this.props.movie.id
+				}
+			})
+		}).then(res => {
+			this.setState({subscribed: res.status !== 200});
+		}).catch(err => {
+			console.log(err);
+		})
+	};
 
 	render() {
-		const doSubscribe = () => {
-			fetch(config.apiUrl + config.endpoints.subscriptions.subscribe, {
-				method: 'post',
-				headers: {
-					'content-type': 'application/json'
-				},
-				body: JSON.stringify({
-					body: {
-						username: this.username,
-						movie: this.props.movie.id,
-						status: this.props.subscribed
-					}
-				})
-			}).then(res => {
-				this.props.movie.subscribed = res.body.status;
-			}).catch(err => {
-				console.log(err);
-			})
-		};
-
 		return <React.Fragment>
 			<Card className={'card'}>
 				<CardActionArea>
@@ -68,8 +84,8 @@ class Movie extends React.Component {
 					<CardActions
 						className={'buttons'}
 					>
-						<Button size="small" color="primary" onClick={doSubscribe}>
-							{this.props.subscribed ? 'Unsubscribe' : 'Subscribe'}
+						<Button size="small" color="primary" onClick={this.state.subscribed ? this.doUnsubscribe : this.doSubscribe}>
+							{this.state.subscribed ? 'Unsubscribe' : 'Subscribe'}
 						</Button>
 					</CardActions>
 				</div>

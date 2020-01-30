@@ -9,7 +9,7 @@ class MoviesList extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch(config.apiUrl + config.endpoints.movies.bestRated)
+		fetch(config.apiUrl + config.endpoints.movies.bestRated + '?username=' + JSON.parse(localStorage.getItem('user')).username)
 			.then(res => res.json())
 			.then(data => {
 				this.setState({movies: data.movies})
@@ -21,7 +21,7 @@ class MoviesList extends React.Component {
 		return <div
 			className={'flex-container'}
 		>
-			{this.state.movies.map(movie => <Movie movie={movie} subscribed={false}/>)}
+			{this.state.movies.map(movie => <Movie movie={movie} subscribed={movie.subscribed}/>)}
 		</div>
 	}
 }

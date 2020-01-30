@@ -39,26 +39,6 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /movies:
-    x-swagger-router-controller: movies
-    get:
-      description: Returns the list of films
-      operationId: getMovies
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/MovieResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
   /movies/bestrated:
     x-swagger-router-controller: movies
     get:
@@ -70,6 +50,11 @@ paths:
           description: The page to fetch from the movie API
           required: false
           type: integer
+        - name: username
+          in: query
+          description: The username of the logged in user to check his subscriptions
+          required: false
+          type: string
       responses:
         "200":
           description: Success
@@ -82,7 +67,7 @@ paths:
   /subscribe:
     x-swagger-router-controller: subscriptions
     post:
-      description: Subscribe/Unsubscribe to a movie
+      description: Subscribe to a movie
       operationId: postSubscribe
       parameters:
         - name: body
@@ -95,11 +80,34 @@ paths:
                 type: string
               movie:
                 type: integer
-              status:
-                type: boolean
       responses:
         "201":
           description: Created
+          schema:
+            $ref: "#/definitions/MovieResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /unsubscribe:
+    x-swagger-router-controller: subscriptions
+    post:
+      description: Unsubscribe to a movie
+      operationId: postUnsubscribe
+      parameters:
+        - name: body
+          in: body
+          description: the body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              movie:
+                type: integer
+      responses:
+        "200":
+          description: Ok
           schema:
             $ref: "#/definitions/MovieResponse"
         default:
