@@ -15,8 +15,6 @@ class Movie extends React.Component {
 		subscribed: this.props.subscribed
 	};
 
-	posterUrl = 'https://image.tmdb.org/t/p/w500/' + this.props.movie.poster_path;
-
 	username = JSON.parse(localStorage.getItem('user')).username;
 
 	doSubscribe = () => {
@@ -63,7 +61,7 @@ class Movie extends React.Component {
 				<CardActionArea>
 					<CardMedia
 						className={'media'}
-						image={this.posterUrl}
+						image={'https://image.tmdb.org/t/p/w500/' + this.props.movie.poster_path}
 						title={this.props.movie.title}
 					/>
 					<CardContent>

@@ -51,3 +51,7 @@ This application uses swagger. Routes are listed in `api/swagger/swagger.yaml`
 ## Disconnecting Docker
 
 To stop all containers type : `docker stop $(docker ps -q)`
+
+## Movies API
+
+For movie infos, I am using the developers.themoviedb.org API.
