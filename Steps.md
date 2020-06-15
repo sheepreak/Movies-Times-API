@@ -11,11 +11,11 @@
   
 ## Create API endpoints
 
-- [ ] Setup auth route
-- [ ] Setup ES POST/PUT routes
-  - [ ] Create movies
-  - [ ] Create subscriptions
-  - [ ] Create users
+- [x] Setup auth route
+- [x] Setup ES POST/PUT routes
+  - [x] Create movies
+  - [x] Create subscriptions
+  - [x] Create users
 - [ ] Setup GET routes
   - [x] Get movies list
   - [ ] Get User details
@@ -24,9 +24,9 @@
 ## Front Implementation
 
 - [x] Generate react app
-- [ ] Create list view
-- [ ] Create subscriptions
-- [ ] Auth
+- [x] Create list view
+- [x] Create subscriptions
+- [x] Auth
 - [ ] User page
 
 ## Testing
