@@ -33,7 +33,7 @@ SwaggerExpress.create(config, async (err, swaggerExpress) => {
 
     await createIndices();
 
-    await createInitialData()
+    await createInitialData();
 
     const port = process.env.PORT || 10010;
     app.listen(port);
